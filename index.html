@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mausam Beats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>MausamBeat 🎧</h1><span>"Music That Matches Your Mood And Weather ☁️"</span>
+    </header>
+    <main>
+        <div class="input-section">
+            <input type="text" id="locationInput" placeholder="Enter your city..." />
+            <button onclick="getWeather()">Get weather</button>
+        </div>
+        <div class="weather-info" id="weatherDisplay"></div>
+
+        <h2>Select Your Mood</h2>
+        <div class="mood-buttons">
+            <button onclick="selectMood('happy')">😊 Happy</button>
+            <button onclick="selectMood('sad')">😔 Sad</button>
+            <button onclick="selectMood('chill')">😌 Chill</button>
+            <button onclick="selectMood('energetic')">💃 Energetic</button>
+        </div>
+        <div class="song" id="songSuggestion"></div>
+    </main>
+    <footer>
+        <p>Made with ❤️ by Lata</p>
+        <a href="https://instagram.com" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="30"
+                height="30">
+        </a>
+        <a href="https://linkedin.com" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"
+                width="30" height="30">
+        </a>
+    </footer>
+</body>
+</html>
