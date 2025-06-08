@@ -1,0 +1,5 @@
+@import "tailwindcss";
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-gradient-to-br from-indigo-100 to-yellow-50 text-gray-800 transition-all duration-300;
+}
