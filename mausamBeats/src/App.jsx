@@ -9,6 +9,23 @@ const App = () => {
   const [songs, setSongs] = useState([]);
   const [loadingSongs, setLoadingSongs] = useState(false);
 
+  // ✅ Get background image based on weather
+  const getBackgroundImage = (weather) => {
+    switch (weather.toLowerCase()) {
+      case "rain":
+        return "url('/rainy.jpg')";
+      case "clouds":
+        return "url('/cloudy.jpg')";
+      case "clear":
+      case "sunny":
+        return "url('/sunny.jpg')";
+      case "snow":
+        return "url('/snow.jpg')";
+      default:
+        return "url('/default.jpg')";
+    }
+  };
+
   const fetchWeather = async (lat, lon) => {
     const apiKey = "YOUR_OPENWEATHERMAP_API_KEY"; // Replace with your actual key
     try {
@@ -37,7 +54,6 @@ const App = () => {
     setLoadingSongs(false);
   };
 
-  // On first load, get user's location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -51,16 +67,20 @@ const App = () => {
     );
   }, []);
 
-  // Fetch songs every time weather or mood changes
   useEffect(() => {
     if (weather && mood) fetchSongs(weather, mood);
   }, [weather, mood]);
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-br from-indigo-200 to-yellow-100 flex flex-col items-center">
-      <h1 className="text-4xl font-bold text-center mb-6">🎵 MausamBeat</h1>
+   <div
+  className="min-h-screen w-full bg-cover bg-center flex justify-center items-center p-6"
+  style={{
+    backgroundImage: weather ? getBackgroundImage(weather) : "url('/default.jpg')",
+  }}
+    >
+      <div className="w-full h-full max-w-6xl space-y-6 bg-white/70 p-6 rounded-lg shadow-lg backdrop-blur overflow-y-auto">
+        <h1 className="text-4xl font-bold text-center mb-6">🎵 MausamBeat</h1>
 
-      <div className="w-full max-w-2xl space-y-6">
         <div className="bg-white p-4 rounded-lg shadow text-center">
           <p className="text-lg font-semibold">
             Weather: <span className="text-blue-600">{weather || "Loading..."}</span>
@@ -68,7 +88,6 @@ const App = () => {
         </div>
 
         <MoodSelector mood={mood} setMood={setMood} />
-
         <SongList songs={songs} loading={loadingSongs} mood={mood} weather={weather} />
       </div>
     </div>
